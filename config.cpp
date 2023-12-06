@@ -13,7 +13,7 @@ using json = nlohmann::json;
 
 SDL_Color vec_to_color(const std::vector<int> &vec)
 {
-   SDL_Color col = { 0 };
+   SDL_Color col;
    if ( vec.size() != 4 ) throw std::runtime_error("invalid color config");
 
    col.r = vec[0]; col.g = vec[1];

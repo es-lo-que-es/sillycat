@@ -20,7 +20,7 @@ class Font {
    TextureGuard texture_guard;
    std::u32string charset;
 
-   SDL_Rect rect = { 0 };
+   SDL_Rect rect;
 };
 
 

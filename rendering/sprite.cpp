@@ -6,6 +6,7 @@
 Sprite::Sprite(SDL_Texture * texture, int period, int mframe_width)
    : mtexture(texture)
 {
+   mrect = { 0, 0, 0, 0 };
    mtick = mperiod = period;
    if ( mframe_width <= 0 ) throw std::runtime_error("invalide sprite mframe width");
    SDL_QueryTexture(texture, nullptr, nullptr, &mrect.w, &mrect.h);

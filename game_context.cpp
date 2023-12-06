@@ -6,6 +6,7 @@
 
 void exit_game(void * par)
 {
+   /*UNUSED*/ (void) par;
    globals.run = false;
 }
 

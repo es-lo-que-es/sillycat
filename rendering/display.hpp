@@ -22,7 +22,7 @@ class Display {
 
  protected:
    std::vector<Display *> children;
-   SDL_Rect mrect = { 0 };
+   SDL_Rect mrect;
 
 };
 

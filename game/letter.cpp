@@ -4,12 +4,12 @@
 
 
 Letter::Letter()
-   : ch(0), font(nullptr)
+   : font(nullptr), ch(0)
 { }
 
 
 Letter::Letter(uint32_t ch, Effect effect, const Font * font) 
-   : ch(ch), effect(effect), font(font) 
+   : font(font), effect(effect), ch(ch)
 { 
    if ( effect.type == Random ) 
       font = &globals.fonts()[rand()%globals.fonts().size()];

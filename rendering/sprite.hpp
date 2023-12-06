@@ -15,7 +15,7 @@ class Sprite {
    void next_frame();
 
    SDL_Texture * mtexture;
-   SDL_Rect mrect = { 0 };
+   SDL_Rect mrect;
 
    int mframes;
    int mframe = 0;

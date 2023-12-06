@@ -48,7 +48,7 @@ void Globals::init_fonts()
       if ( not_ttf ) continue;
 
       try { 
-         mfonts.emplace_back(Font(entry.path(), config.alphabet, config.font_color, config.font_size));
+         mfonts.emplace_back(Font(entry.path().string(), config.alphabet, config.font_color, config.font_size));
       } catch(std::exception &e) { 
          fprintf(stderr, "failed to create font: %s\n", e.what());
       }

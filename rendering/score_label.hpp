@@ -11,7 +11,6 @@ class ScoreLabel : public Display {
 
    ScoreLabel();
    int score() const;
-   void render(int score);
 
    void init(const std::string &text, SDL_Rect rect, int font_size);
    ScoreLabel(const std::string &text, SDL_Rect rect, int font_size);

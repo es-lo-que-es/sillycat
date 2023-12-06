@@ -31,7 +31,7 @@ void append_glyph(SDL_Surface * target, TTF_Font * font, SDL_Rect r, SDL_Color c
 
 SDL_Rect glyph_rect(TTF_Font * font) 
 {
-   SurfaceGuard surface(TTF_RenderGlyph32_Solid(font, 'A', { 0 }));
+   SurfaceGuard surface(TTF_RenderGlyph32_Solid(font, 'A', { 0, 0, 0, 0 }));
    return { 0, 0, surface.get()->w, surface.get()->h };
 }
 
@@ -40,6 +40,7 @@ Font::Font(const std::string &path, const std::u32string &abc, SDL_Color col, in
    : charset(abc)
 {
    rect.w = size;
+   rect.x = rect.y = 0;
 
    FontGuard font(TTF_OpenFont(path.c_str(), size));
    rect.h = glyph_rect(font.get()).h;

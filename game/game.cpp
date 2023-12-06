@@ -5,7 +5,8 @@
 
 
 Game::Game(int font_size, int hp)
-   : mfont_size(font_size), player(font_size*1.2, hp)
+   : player(font_size*1.2, hp),
+     mfont_size(font_size)
 { }
 
 
@@ -20,7 +21,7 @@ void Game::reset()
 
 void Game::move_words()
 {
-   for ( int i = 0; i < mwords.size(); ++i ) {
+   for ( size_t i = 0; i < mwords.size(); ++i ) {
 
       if ( !mwords[i].move() ) {
          mwords.erase(mwords.begin() + i);
