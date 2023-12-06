@@ -77,7 +77,8 @@ void Globals::init(SDL_Rect r, int tick, int speed)
    int window_flags = SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN;
 #endif
 
-   mwindow.reset(SDL_CreateWindow("_", r.x, r.y, r.w, r.h, window_flags));
+   int pos = SDL_WINDOWPOS_CENTERED;
+   mwindow.reset(SDL_CreateWindow("sillycat", pos, pos, r.w, r.h, window_flags));
    mrenderer.reset(SDL_CreateRenderer(mwindow.get(), -1, SDL_RENDERER_ACCELERATED));
 
    SDL_Color c = config.background_color;
