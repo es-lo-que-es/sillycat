@@ -24,7 +24,8 @@ void Game::move_words()
    for ( size_t i = 0; i < mwords.size(); ++i ) {
 
       if ( !mwords[i].move() ) {
-         mwords.erase(mwords.begin() + i);
+         mwords[i] = std::move(mwords.back());
+         mwords.pop_back();
          --i;
       }
 

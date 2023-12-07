@@ -6,7 +6,7 @@
 #include <algorithm>
 
 
-const int max_width = 4096;
+const int max_width = 2048;
 
 const int rmask = 0x000000ff;
 const int gmask = 0x0000ff00;
