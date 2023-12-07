@@ -17,10 +17,12 @@ class Font {
    void render_string(const std::string &str, SDL_Point point, int font_size) const;
 
  private:
-   TextureGuard texture_guard;
-   std::u32string charset;
+   TextureGuard mtexture_guard;
+   std::u32string mcharset;
+   int mrowsize;
 
-   SDL_Rect rect;
+
+   SDL_Rect mrect;
 };
 
 

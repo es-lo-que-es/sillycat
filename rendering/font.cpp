@@ -6,6 +6,8 @@
 #include <algorithm>
 
 
+const int max_width = 4096;
+
 const int rmask = 0x000000ff;
 const int gmask = 0x0000ff00;
 const int bmask = 0x00ff0000;
@@ -38,36 +40,47 @@ SDL_Rect glyph_rect(TTF_Font * font)
 
 
 Font::Font(const std::string &path, const std::u32string &abc, SDL_Color col, int size)
-   : charset(abc)
+   : mcharset(abc)
 {
-   rect.w = size;
-   rect.x = rect.y = 0;
+   mrect.w = size;
+   mrect.x = mrect.y = 0;
 
    // sorting charset in case its not so i can use binary search
-   std::sort(charset.begin(), charset.end());
+   std::sort(mcharset.begin(), mcharset.end());
 
    FontGuard font(TTF_OpenFont(path.c_str(), size));
-   rect.h = glyph_rect(font.get()).h;
+   mrect.h = glyph_rect(font.get()).h;
    
-   int w = size * abc.length();
-   SurfaceGuard surface(SDL_CreateRGBSurface(0, w, rect.h, 32, rmask, gmask, bmask, amask));
+   mrowsize = max_width / size;
+   SurfaceGuard surface(SDL_CreateRGBSurface(0, max_width, max_width, 32, rmask, gmask, bmask, amask));
 
-   SDL_Rect r = rect;
-   for ( uint32_t ch : charset ) {
-      append_glyph(surface.get(), font.get(), r, col, ch);
-      r.x += r.w; 
+   int i = 0;
+   SDL_Rect r = mrect;
+
+   while ( i < mcharset.size() ) {
+
+      for ( int j = 0; j < mrowsize && i < mcharset.size(); ++j ) {
+
+         append_glyph(surface.get(), font.get(), r, col, mcharset[i]);
+
+         r.x += r.w;
+         ++i;
+      } 
+
+      r.y += r.h;
+      r.x = 0;
    }
    
-   texture_guard.reset(SDL_CreateTextureFromSurface(globals.renderer(), surface.get()));
+   mtexture_guard.reset(SDL_CreateTextureFromSurface(globals.renderer(), surface.get()));
 }
 
 
 int Font::find_character(uint32_t ch) const
 {
-   auto it = std::lower_bound(charset.begin(), charset.end(), ch);
-   if ( it == charset.end() || *it != ch ) return -1;
+   auto it = std::lower_bound(mcharset.begin(), mcharset.end(), ch);
+   if ( it == mcharset.end() || *it != ch ) return -1;
 
-   return it - charset.begin();
+   return it - mcharset.begin();
 }
 
 
@@ -76,10 +89,11 @@ void Font::render_character(uint32_t ch, SDL_Rect * dest) const
    int index = find_character(ch);
    if ( index == -1 ) return;
 
-   SDL_Rect r = rect;
-   r.x = r.w * index;
+   SDL_Rect r = mrect;
+   r.y = (index / mrowsize) * r.h;
+   r.x = (index % mrowsize) * r.w;
 
-   SDL_RenderCopy(globals.renderer(), texture_guard.get(), &r, dest);
+   SDL_RenderCopy(globals.renderer(), mtexture_guard.get(), &r, dest);
 }
 
 

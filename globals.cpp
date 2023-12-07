@@ -68,8 +68,8 @@ void Globals::init(SDL_Rect r, int tick, int speed)
    
    mdefault_speed = mspeed = speed;
 
-   mmax_speed = speed * 1.4;
-   mmin_speed = speed / 1.2;
+   mmin_speed = speed / 1.4;
+   mmax_speed = speed * 2;
    
 #ifdef EMSCRIPTEN_BUILD
    int window_flags = SDL_WINDOW_SHOWN;
