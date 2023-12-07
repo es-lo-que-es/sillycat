@@ -3,6 +3,7 @@
 #include "util.hpp"
 #include <SDL2/SDL_ttf.h>
 #include <stdexcept>
+#include <algorithm>
 
 
 const int rmask = 0x000000ff;
@@ -42,6 +43,9 @@ Font::Font(const std::string &path, const std::u32string &abc, SDL_Color col, in
    rect.w = size;
    rect.x = rect.y = 0;
 
+   // sorting charset in case its not so i can use binary search
+   std::sort(charset.begin(), charset.end());
+
    FontGuard font(TTF_OpenFont(path.c_str(), size));
    rect.h = glyph_rect(font.get()).h;
    
@@ -60,10 +64,10 @@ Font::Font(const std::string &path, const std::u32string &abc, SDL_Color col, in
 
 int Font::find_character(uint32_t ch) const
 {
-   for ( int i = 0; i < charset.length(); ++i ) 
-      if ( charset[i] == ch ) return i;
+   auto it = std::lower_bound(charset.begin(), charset.end(), ch);
+   if ( it == charset.end() || *it != ch ) return -1;
 
-   return -1;
+   return it - charset.begin();
 }
 
 
