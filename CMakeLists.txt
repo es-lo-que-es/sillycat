@@ -59,7 +59,7 @@ if ( ${BUILD_WASM} )
    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${USE_FLAGS}")
    set(PRELOAD_FILES "--preload-file=pics --preload-file=fonts --preload-file=config.json --use-preload-plugins")
 
-   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${USE_FLAGS} ${PRELOAD_FILES}")
+   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sTOTAL_MEMORY=20MB ${USE_FLAGS} ${PRELOAD_FILES}")
    set(CMAKE_EXECUTABLE_SUFFIX .js)
 
    add_executable(sillycat web/main.cpp ${GAME_SOURCES} ${RENDERING_SOURCES})
