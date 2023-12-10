@@ -2,6 +2,7 @@
 #include "game_display.hpp"
 #include "globals.hpp"
 #include "menus.hpp"
+#include <chrono>
 
 
 void exit_game(void * par)
@@ -37,20 +38,26 @@ GameContext::GameContext(SDL_Rect r, int size, int hp)
 void GameContext::loop()
 {
    SDL_Event e;
+   using namespace std::chrono;
 
    while ( globals.run ) {
 
-      while ( SDL_PollEvent(&e) ) display->handle_event(&e);
+      auto fstart = high_resolution_clock::now();
 
+      while ( SDL_PollEvent(&e) ) display->handle_event(&e);
+      
       if ( game_running ) {
          game_running = game.do_tick();
          if ( !game_running ) display = &main_menu;
       }
-
+      
       SDL_RenderClear(globals.renderer());
       display->render();
       SDL_RenderPresent(globals.renderer());
 
-      SDL_Delay(globals.tick());
+      auto fend = high_resolution_clock::now();
+      std::chrono::duration<double, std::milli> elapsed = fend - fstart;
+
+      SDL_Delay(globals.tick() - (int)elapsed.count());
    }
 }

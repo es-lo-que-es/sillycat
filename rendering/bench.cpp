@@ -13,10 +13,10 @@ void start_timer()
 }
 
 
-void end_timer()
+void end_timer(const char * str)
 {
    auto end = std::chrono::high_resolution_clock::now();
-   std::chrono::duration<double> duration = end - start;
+   std::chrono::duration<double, std::milli> duration = end - start;
 
-   printf("elapsed time: %lfs\n", duration.count());
+   printf("%s: %lfms\n", str, duration.count());
 }

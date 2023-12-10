@@ -26,6 +26,7 @@ class Globals {
    SDL_Renderer * renderer() const;
    const std::vector<Font>& fonts() const;
    SDL_Rect rect() const;
+
    int speed() const;
    int tick() const;
 

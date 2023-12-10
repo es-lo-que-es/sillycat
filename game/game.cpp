@@ -35,8 +35,8 @@ void Game::move_words()
 
 void Game::spawn_word()
 {
-   if ( mtick % 18 != 0 ) return;
-   Direction dir = Direction((mtick / 18) % 4);
+   if ( mtick % 16 != 0 ) return;
+   Direction dir = Direction((mtick / 16) % 4);
 
    auto pair = globals.config.random_word_combo();
 

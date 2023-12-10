@@ -9,7 +9,7 @@
 Globals globals;
 
 const int player_hp = 9;
-const int tick = 33;
+const int tick = 24;
 
 const SDL_Rect rect = { 0, 0, 600, 600 };
 
@@ -34,7 +34,7 @@ void emscripten_loop(void * par)
 
 int main()
 {
-   int speed = rect.w / 65;
+   int speed = rect.w / 100;
    int font_size = rect.w / 16;
 
    globals.init(rect, tick, speed);
