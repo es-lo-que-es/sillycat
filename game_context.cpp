@@ -3,6 +3,7 @@
 #include "globals.hpp"
 #include "menus.hpp"
 #include <chrono>
+#include <cmath>
 
 
 void exit_game(void * par)
@@ -58,6 +59,7 @@ void GameContext::loop()
       auto fend = high_resolution_clock::now();
       std::chrono::duration<double, std::milli> elapsed = fend - fstart;
 
-      SDL_Delay(globals.tick() - (int)elapsed.count());
+      int delay = globals.tick() - std::round(elapsed.count());
+      SDL_Delay(delay > 0 ? delay : 0);
    }
 }

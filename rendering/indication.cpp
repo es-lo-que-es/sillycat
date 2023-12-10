@@ -29,7 +29,7 @@ void Indicator::reset()
 
 void Indicator::indicate(Indication ind)
 {
-   count[ind] += 7;
+   count[ind] += 9;
 }
 
 
