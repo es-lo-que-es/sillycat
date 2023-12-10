@@ -9,38 +9,47 @@
 Globals globals;
 
 const int player_hp = 9;
-const int tick = 24;
+const int tick = 32;
 
 const SDL_Rect rect = { 0, 0, 600, 600 };
 
 
-void emscripten_loop(void * par)
+bool flag = false;
+// i have no clue how to do frame pacing with emscripten 
+EM_BOOL emscripten_loop(double time, void * par)
 {
    SDL_Event e;
    GameContext * ctx = (GameContext*) par;
+   
+   if ( flag ) {
+      while ( SDL_PollEvent(&e) ) ctx->display->handle_event(&e);
 
-   while ( SDL_PollEvent(&e) ) ctx->display->handle_event(&e);
-
-   if ( ctx->game_running ) {
-      ctx->game_running = ctx->game.do_tick();
-      if ( !ctx->game_running ) ctx->display = &ctx->main_menu;
+      if ( ctx->game_running ) {
+         ctx->game_running = ctx->game.do_tick();
+         if ( !ctx->game_running ) ctx->display = &ctx->main_menu;
+      }
+   } else {
+      SDL_RenderClear(globals.renderer());
+      ctx->display->render();
+      SDL_RenderPresent(globals.renderer());
    }
 
-   SDL_RenderClear(globals.renderer());
-   ctx->display->render();
-   SDL_RenderPresent(globals.renderer());
+   flag = !flag;
+   emscripten_request_animation_frame(&emscripten_loop, ctx);
+
+   return EM_TRUE;
 }
 
 
 int main()
 {
-   int speed = rect.w / 100;
+   int speed = rect.w / 65;
    int font_size = rect.w / 16;
 
    globals.init(rect, tick, speed);
    GameContext * ctx = new GameContext(rect, font_size, player_hp);
 
-   emscripten_set_main_loop_arg(&emscripten_loop, ctx, globals.tick(), 0);
+   emscripten_request_animation_frame(&emscripten_loop, ctx);
 
    return 0;
 }
