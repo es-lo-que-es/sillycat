@@ -1,8 +1,10 @@
-#ifndef sILLYCAT_INDICATION
-#define sILLYCAT_INDICATION
+#ifndef SILLYCAT_INDICATION_HEADER
+#define SILLYCAT_INDICATION_HEADER
 
 #include "display.hpp"
 #include <array>
+#include <chrono>
+
 
 #define INDICATION_COUNT 4
 enum Indication { PointGain, PointLoss, HpGain, HpLoss };
@@ -17,7 +19,8 @@ class Indicator : public Display {
    void reset();
  
  private:
-   std::array<int, INDICATION_COUNT> count;
+   std::array<std::chrono::time_point<std::chrono::high_resolution_clock>, INDICATION_COUNT> mtpoints;
+   static const unsigned int mperiod = 700;
 
 };
 

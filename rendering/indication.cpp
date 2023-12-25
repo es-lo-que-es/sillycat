@@ -1,6 +1,8 @@
 #include "indication.hpp"
 #include "util.hpp"
 
+using namespace std::chrono;
+
 
 SDL_Color INDICATION_COLORS[] = {
    { 50, 169, 169, 255 },
@@ -23,24 +25,23 @@ Indicator::Indicator(SDL_Rect rect)
 
 void Indicator::reset()
 {
-   count.fill(0);
+   for ( auto &tp : mtpoints ) tp = high_resolution_clock::from_time_t(0);
 }
 
 
 void Indicator::indicate(Indication ind)
 {
-   count[ind] += 9;
+
+   mtpoints[ind] = high_resolution_clock::now();
 }
 
 
 void Indicator::render()
 {
+   auto now = high_resolution_clock::now();
+
    for ( int i = 0; i < INDICATION_COUNT; ++i ) {
-
-      if ( !count[i] ) continue;
-
-      render_draw_rect(&mrect, INDICATION_COLORS[i]);
-      --count[i];
-
+      duration<double, std::milli> elapsed = now - mtpoints[i];
+      if ( elapsed.count() < mperiod ) render_draw_rect(&mrect, INDICATION_COLORS[i]);
    }
 }
