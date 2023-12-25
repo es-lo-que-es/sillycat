@@ -18,10 +18,10 @@ void start_game(void * par)
    GameContext * ctx = (GameContext * ) par;
    ctx->display = &ctx->game_display;
 
-   ctx->game_running = true;
-
-   ctx->game_display.reset();
    ctx->game.reset();
+   ctx->game_display.reset();
+
+   ctx->game_running = true;
 }
 
 

@@ -6,6 +6,9 @@
 
 void GameDisplay::reset()
 {
+   mscore_label.update(mgame->player.score());
+   mhealth_bar.update(mgame->player.health());
+
    active_directions.fill(0);
    indicator.reset();
 }
@@ -27,7 +30,6 @@ GameDisplay::GameDisplay(Game * game, SDL_Rect rect)
    mscore_label.init("score:", {rect.x, rect.y, rect.w, 20}, 14);
    mclose_button.init("X", {rect.w - 22, 2, 20, 20});
    mhealth_bar.init("hp:", {rect.x, rect.y, 100, 20}, 14);
-
 
    mclose_button.set_click_handler(close_button_handler, game);
 
