@@ -1,9 +1,11 @@
 #ifndef SILLYCAT_GAME_HEADER
 #define SILLYCAT_GAME_HEADER
 
-#include <vector>
 #include "word.hpp"
 #include "player.hpp"
+
+#include <vector>
+#include <chrono>
 
 
 class Game {
@@ -23,12 +25,14 @@ class Game {
  private:
    void move_words();
    void spawn_word();
-
    std::vector<Word> mwords;
+
+   std::chrono::time_point<std::chrono::high_resolution_clock> mtpoint;
+   static const unsigned int mspawn_period = 384;
+   Direction mlast_dir = Up;
 
    bool mover = false;
    int mfont_size;
-   int mtick = 0;
 };
 
 

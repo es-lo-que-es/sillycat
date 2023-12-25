@@ -8,7 +8,13 @@ enum Direction { Up, Right, Down, Left };
 
 inline Direction rev(Direction dir) 
 { 
-   return Direction((dir + DIRECTION_COUNT / 2) % DIRECTION_COUNT); 
+   return Direction((dir + 2) % 4); 
+}
+
+
+inline Direction inc(Direction dir)
+{
+   return Direction((dir + 1) % 4);
 }
 
 

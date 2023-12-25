@@ -1,6 +1,7 @@
 #include "game.hpp"
 #include "globals.hpp"
 #include "util.hpp"
+#include <chrono>
 #include <time.h>
 
 
@@ -12,10 +13,12 @@ Game::Game(int font_size, int hp)
 
 void Game::reset()
 {
-   mover = false;
+   mtpoint = std::chrono::high_resolution_clock::from_time_t(0);
+
    player.reset();
    mwords.clear();
-   mtick = 0;
+
+   mover = false;
 }
 
 
@@ -35,8 +38,10 @@ void Game::move_words()
 
 void Game::spawn_word()
 {
-   if ( mtick % 16 != 0 ) return;
-   Direction dir = Direction((mtick / 16) % 4);
+   auto now = std::chrono::high_resolution_clock::now();
+   std::chrono::duration<double, std::milli> elapsed = now - mtpoint;
+
+   if ( elapsed.count() < mspawn_period ) return;
 
    auto pair = globals.config.random_word_combo();
 
@@ -46,8 +51,11 @@ void Game::spawn_word()
    int quarter = mfont_size / 4;
    int fontsize = (mfont_size + quarter) - rand() % (mfont_size / 2);
 
-   Word word(pair.first, fontsize, pair.second, font, dir);
+   Word word(pair.first, fontsize, pair.second, font, mlast_dir);
    mwords.emplace_back(std::move(word));
+
+   mlast_dir = inc(mlast_dir);
+   mtpoint = now;
 }
 
 
@@ -62,8 +70,6 @@ void Game::end()
 
 bool Game::do_tick()
 {
-   ++mtick;
-
    move_words();
    spawn_word();
    
