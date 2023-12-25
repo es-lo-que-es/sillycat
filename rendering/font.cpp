@@ -14,7 +14,7 @@ const int bmask = 0x00ff0000;
 const int amask = 0xff000000;
 
 
-void append_glyph(SDL_Surface * target, TTF_Font * font, SDL_Rect r, SDL_Color col, uint32_t ch)
+void append_glyph(SDL_Surface * target, TTF_Font * font, SDL_Rect r, uint32_t ch)
 {
    int res = TTF_GlyphIsProvided32(font, ch);
    if ( res == 0 ) ch = '?'; 
@@ -24,7 +24,7 @@ void append_glyph(SDL_Surface * target, TTF_Font * font, SDL_Rect r, SDL_Color c
    TTF_GlyphMetrics32(font, ch, NULL, NULL, NULL, NULL, &advance);
    r.x += (r.w - advance) / 2;
 
-   SDL_Surface * glyph = TTF_RenderGlyph32_Solid(font, ch, col);
+   SDL_Surface * glyph = TTF_RenderGlyph32_Solid(font, ch, {255, 255, 255, 255});
    if ( glyph == nullptr ) throw std::runtime_error(sdl_error("failed to render a glyph: "));
 
    SDL_BlitSurface(glyph, nullptr, target, &r);
@@ -39,7 +39,7 @@ SDL_Rect glyph_rect(TTF_Font * font)
 }
 
 
-Font::Font(const std::string &path, const std::u32string &abc, SDL_Color col, int size)
+Font::Font(const std::string &path, const std::u32string &abc, int size)
    : mcharset(abc)
 {
    mrect.w = size;
@@ -61,7 +61,7 @@ Font::Font(const std::string &path, const std::u32string &abc, SDL_Color col, in
 
       for ( int j = 0; j < mrowsize && i < mcharset.size(); ++j ) {
 
-         append_glyph(surface.get(), font.get(), r, col, mcharset[i]);
+         append_glyph(surface.get(), font.get(), r, mcharset[i]);
 
          r.x += r.w;
          ++i;
@@ -105,4 +105,10 @@ void Font::render_string(const std::string &str, SDL_Point point, int font_size)
       render_character((uint32_t)c, &r);
       r.x += r.w;
    }
+}
+
+
+void Font::set_color(SDL_Color c)
+{
+   SDL_SetTextureColorMod(mtexture_guard.get(), c.r, c.g, c.b);
 }

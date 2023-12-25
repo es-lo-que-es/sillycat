@@ -9,18 +9,18 @@
 class Font {
 
  public:
-   Font(const std::string &path, const std::u32string &abc, SDL_Color col, int font_size);
+   Font(const std::string &path, const std::u32string &abc, int font_size);
 
    void render_character(uint32_t ch, SDL_Rect * dest) const;
    int find_character(uint32_t ch) const;
 
    void render_string(const std::string &str, SDL_Point point, int font_size) const;
+   void set_color(SDL_Color col);
 
  private:
    TextureGuard mtexture_guard;
    std::u32string mcharset;
    int mrowsize;
-
 
    SDL_Rect mrect;
 };
