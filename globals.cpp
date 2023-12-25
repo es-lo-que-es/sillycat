@@ -90,7 +90,7 @@ void Globals::init(SDL_Rect r, int tick, int speed)
    std::fstream score("highscore", std::ios::binary | std::ios::in);
    if ( score.is_open() ) score.read((char*)&highscore, sizeof(highscore));
 
-   mlasat_invert = std::chrono::high_resolution_clock::from_time_t(0);
+   mlasat_invert = std::chrono::time_point<std::chrono::high_resolution_clock>();
 
    textures.init();
    init_fonts();
@@ -126,7 +126,7 @@ void Globals::invert()
 
 void Globals::reset()
 {
-   mlasat_invert = std::chrono::high_resolution_clock::from_time_t(0);
+   mlasat_invert = std::chrono::time_point<std::chrono::high_resolution_clock>();
 
    if ( minverted ) {
 

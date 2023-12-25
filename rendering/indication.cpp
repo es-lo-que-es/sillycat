@@ -25,7 +25,7 @@ Indicator::Indicator(SDL_Rect rect)
 
 void Indicator::reset()
 {
-   for ( auto &tp : mtpoints ) tp = high_resolution_clock::from_time_t(0);
+   for ( auto &tp : mtpoints ) tp = time_point<high_resolution_clock>();
 }
 
 

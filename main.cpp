@@ -2,7 +2,6 @@
 #include "globals.hpp"
 #include <stdio.h>
 
-
 Globals globals;
 
 const int player_hp = 9;
@@ -13,7 +12,6 @@ const SDL_Rect rect = { 0, 0, 600, 600 };
 
 int main()
 {
-
    int speed = rect.w / 100;
    int font_size = rect.w / 16;
 

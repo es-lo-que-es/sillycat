@@ -13,7 +13,7 @@ Game::Game(int font_size, int hp)
 
 void Game::reset()
 {
-   mtpoint = std::chrono::high_resolution_clock::from_time_t(0);
+   mtpoint = std::chrono::time_point<std::chrono::high_resolution_clock>();
 
    player.reset();
    mwords.clear();
