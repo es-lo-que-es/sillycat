@@ -1,6 +1,7 @@
 #include "globals.hpp"
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
+#include <chrono>
 #include <fstream>
 #include <stdio.h>
 #include <stdexcept>
@@ -48,7 +49,8 @@ void Globals::init_fonts()
       if ( not_ttf ) continue;
 
       try { 
-         mfonts.emplace_back(Font(entry.path().string(), config.alphabet, config.font_color, config.font_size));
+         mfonts.emplace_back(Font(entry.path().string(), config.alphabet, config.font_size));
+         mfonts.back().set_color(config.font_color);
       } catch(std::exception &e) { 
          fprintf(stderr, "failed to create font: %s\n", e.what());
       }
@@ -88,12 +90,57 @@ void Globals::init(SDL_Rect r, int tick, int speed)
    std::fstream score("highscore", std::ios::binary | std::ios::in);
    if ( score.is_open() ) score.read((char*)&highscore, sizeof(highscore));
 
+   mlasat_invert = std::chrono::high_resolution_clock::from_time_t(0);
+
    textures.init();
    init_fonts();
 }
 
 
-void Globals::reset_speed()
+bool Globals::inverted() const 
 {
+   return minverted;
+}
+
+
+void Globals::invert()
+{
+   auto now = std::chrono::high_resolution_clock::now();
+   std::chrono::duration<double, std::milli> elapsed = now - mlasat_invert;
+
+   if ( elapsed.count() < minvert_period ) return;
+
+   SDL_Color f = config.font_color;
+   SDL_Color b = config.background_color;
+
+   for ( Font &font : mfonts ) font.set_color(b);
+   SDL_SetRenderDrawColor(mrenderer.get(), f.r, f.g, f.b, f.a);
+   
+   config.background_color = f;
+   config.font_color = b;
+
+   minverted = !minverted;
+   mlasat_invert = now;
+}
+
+
+void Globals::reset()
+{
+   mlasat_invert = std::chrono::high_resolution_clock::from_time_t(0);
+
+   if ( minverted ) {
+
+      SDL_Color f = config.font_color;
+      SDL_Color b = config.background_color;
+
+      SDL_SetRenderDrawColor(mrenderer.get(), f.r, f.g, f.b, f.a);
+      for ( Font &font : mfonts ) font.set_color(b);
+
+      config.background_color = f;
+      config.font_color = b;
+
+      minverted = false;
+   }
+
    mspeed = mdefault_speed;
 }

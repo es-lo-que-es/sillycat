@@ -62,8 +62,7 @@ void Game::spawn_word()
 void Game::end()
 {
    if ( player.score() > globals.highscore ) globals.highscore = player.score();
-   globals.reset_speed();
-
+   globals.reset();
    mover = true; 
 }
 

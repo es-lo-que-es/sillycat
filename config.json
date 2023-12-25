@@ -14,6 +14,7 @@
       { "type": 2, "value": -1, "str": "-POINTS-" },
       { "type": 3, "value": 1, "str": "FASTER" },
       { "type": 3, "value": -1, "str": "SLOWER" },
-      { "type": 4, "value": 1, "str": "RANDOM" }
+      { "type": 4, "value": 0, "str": "INVERT" },
+      { "type": 5, "value": 1, "str": "RANDOM" }
    ] 
 }

@@ -84,11 +84,14 @@ void Player::apply_effect(Effect effect)
       if ( effect.type == Death ) effect = { Health, -1 };
    }
 
+   if ( globals.inverted() ) effect.value *= -1;
+
    switch ( effect.type ) {
       case Health: mhealth += effect.value; break;
       case Death: mhealth = 0; break;
       case Points: mscore += effect.value; break;
       case Speed: globals.mod_speed(effect.value); break;
+      case Invert: globals.invert(); break;
 
       default: break;
    } 

@@ -6,6 +6,7 @@
 #include "texture_pack.hpp"
 #include "guard.hpp"
 #include <SDL2/SDL.h>
+#include <chrono>
 #include <vector>
 
 
@@ -15,18 +16,20 @@ class Globals {
    bool run = true;
    int highscore = 0;
 
-   void reset_speed();
+   void reset();
+   void invert();
    void mod_speed(int val);
 
    void init(SDL_Rect rect, int tick, int speed);
 
    TexturePack textures;
-   const Config config;
+   Config config;
 
    SDL_Renderer * renderer() const;
    const std::vector<Font>& fonts() const;
    SDL_Rect rect() const;
-
+   
+   bool inverted() const;
    int speed() const;
    int tick() const;
 
@@ -36,6 +39,10 @@ class Globals {
    SdlGuard msdl;
    WindowGuard mwindow;
    RendererGuard mrenderer;
+
+   std::chrono::time_point<std::chrono::high_resolution_clock> mlasat_invert;
+   static const unsigned int minvert_period = 2000;
+   bool minverted = false;
 
    std::vector<Font> mfonts;
    void init_fonts();

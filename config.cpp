@@ -40,7 +40,7 @@ Config::Config()
    font_color = vec_to_color(data["font-color"]);
 
    for ( auto &word : data["words"] ) {
-      if ( word["type"] < 0 || word["type"] >= EFFECT_TYPE_COUNT ) throw std::runtime_error("uknown effect type in the config");
+      if ( word["type"] < 0 || word["type"] >= EFFECT_TYPE_COUNT ) throw std::runtime_error("unknown effect type in the config");
       word_combos.push_back({ parse_utf8_string(word["str"]), { word["type"], word["value"]}});
    }
    
