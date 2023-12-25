@@ -1,19 +1,30 @@
 <h3>SILLI<i>CAT</i></h3>
-
-![cat](https://github.com/es-lo-que-es/sillycat/assets/143192493/64961639-564d-4267-907c-dd45d50455e9)
-
 <p> simple game about a silly cat dodging flying words </p>
 
+![cat](https://github.com/es-lo-que-es/sillycat/assets/143192493/c86c7fae-751c-43ef-a5f8-f419104381ee)
 
-https://github.com/es-lo-que-es/sillycat/assets/143192493/7f35db5a-b162-481e-9301-1082d8bb8165
+
+<p> u can also <a href="https://es-lo-que-es.github.io/sillycat-web-build/">play it</a> in the browser </p>
+
+
+
+https://github.com/es-lo-que-es/sillycat/assets/143192493/1c4b6712-805f-4903-a81c-6da9ac19d10b
+
+
+
 
 
 <p> somewhat configurable: </p>
 
-https://github.com/es-lo-que-es/sillycat/assets/143192493/bf171867-907f-4447-bde0-0bc73284dc46
 
 
-https://github.com/es-lo-que-es/sillycat/assets/143192493/00ad2842-7941-49a1-a2d9-a9f0d8d845f0
+https://github.com/es-lo-que-es/sillycat/assets/143192493/cca49e5a-e0ec-4ecd-a53b-fe6f90476f87
+
+
+
+https://github.com/es-lo-que-es/sillycat/assets/143192493/02cd8570-f64e-4d8a-b8d4-15b1dec7fe60
+
+
 
 
 <p> fonts used by default: </p>
