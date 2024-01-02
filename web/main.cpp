@@ -28,9 +28,11 @@ EM_BOOL emscripten_loop(double time, void * par)
          ctx->game_running = ctx->game.do_tick();
          if ( !ctx->game_running ) ctx->display = &ctx->main_menu;
       }
-   } else {
+
       SDL_RenderClear(globals.renderer());
       ctx->display->render();
+
+   } else {
       SDL_RenderPresent(globals.renderer());
    }
 

@@ -54,12 +54,13 @@ void GameContext::loop()
       
       SDL_RenderClear(globals.renderer());
       display->render();
-      SDL_RenderPresent(globals.renderer());
 
       auto fend = high_resolution_clock::now();
       std::chrono::duration<double, std::milli> elapsed = fend - fstart;
 
       int delay = globals.tick() - std::round(elapsed.count());
       SDL_Delay(delay > 0 ? delay : 0);
+
+      SDL_RenderPresent(globals.renderer());
    }
 }
