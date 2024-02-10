@@ -1,0 +1,20 @@
+{
+   "font-size": 128,
+
+   "font-color": [ 173, 186, 199, 255 ],
+   "background-color": [34, 39, 46, 255],
+
+   "alphabet": "+-0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz",
+
+   "words": [
+      { "type": 0, "value": -1, "str": "DAMAGE" },
+      { "type": 0, "value": 1, "str": "HEAL" },
+      { "type": 1, "value": 0, "str": "DEATH" },
+      { "type": 2, "value": 1, "str": "+POINTS+" },
+      { "type": 2, "value": -1, "str": "-POINTS-" },
+      { "type": 3, "value": 1, "str": "FASTER" },
+      { "type": 3, "value": -1, "str": "SLOWER" },
+      { "type": 4, "value": 0, "str": "INVERT" },
+      { "type": 5, "value": 1, "str": "RANDOM" }
+   ] 
+}

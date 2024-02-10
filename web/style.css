@@ -1,0 +1,56 @@
+
+body {
+   font-family: monospace;
+   
+   background: #22272e;
+   color: #adbac7;
+
+   width: 100%;
+
+   padding: 0;
+   margin: 0;
+}
+
+
+.container {
+   text-align: center;
+   max-width: 600px;
+   margin: auto;
+}
+
+
+.header {
+   padding: 1rem 0;
+   font-size: 5rem;
+   margin: 0;
+}
+
+
+.info {
+   padding: 1rem 0;
+   font-size: 1.2rem;
+   text-align: left;
+}
+
+.reffs {
+   text-align: center;
+}
+
+.reffs p {
+   display: inline-block;
+}
+
+.reffs a {
+   color: #adbac7;
+}
+
+
+#placeholder {
+
+   max-height: 600px;
+   line-height: 600px;
+
+   text-align: center;
+   font-size: 5rem;
+   margin: 0;
+}

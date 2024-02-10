@@ -1,0 +1,55 @@
+<html>
+
+   <head>
+      <title> Sillicat </title>
+      <link rel = "stylesheet" href = "style.css" />
+   </head>
+
+   <body>
+      
+      <div class = "container" >
+
+         <p class = "header"> SILLY<i>CAT</i> </p>
+         
+         <p id = "placeholder"> LOADING... </p>
+         <canvas style="display:none" id = "canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+
+         <div class = "info">
+
+            <p> smoll game about a silly cat-like creature dodging giant letters </p>
+
+            <div class = "reffs"> 
+               <p><a href="https://github.com/es-lo-que-es/sillycat">source</a></p>
+               <p> | </p>
+               <p><a href="https://github.com/es-lo-que-es/sillycat"> native builds </a></p>
+               <p> | </p>
+               <p> <a href="https://www.buymeacoffee.com/es_lo_que_es">support the dev &#9825;</a></p>
+            </div>
+
+         </div>
+
+      </div>
+
+      <script type='text/javascript'>
+
+         const can = document.getElementById("canvas");
+         const placeholder = document.getElementById("placeholder");
+
+         var Module = {
+
+            canvas: (() => { return can; })(),
+
+            setStatus: (text) => {
+               if ( !text ) {
+                  placeholder.style.display = "none";
+                  canvas.style.display = "block";
+               }
+            }
+         }
+
+      </script>
+
+      <script async type="text/javascript" src="sillycat.js"></script>
+
+   </body>
+</html>
