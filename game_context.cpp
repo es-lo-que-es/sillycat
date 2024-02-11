@@ -13,6 +13,13 @@ void exit_game(void * par)
 }
 
 
+void switch_mute(void * par)
+{
+   /*UNUSED*/ (void) par;
+   globals.audio.switch_mute();
+}
+
+
 void start_game(void * par)
 {
    GameContext * ctx = (GameContext * ) par;
@@ -31,6 +38,7 @@ GameContext::GameContext(SDL_Rect r, int size, int hp)
      main_menu(r)
 {
    main_menu.play_button.set_click_handler(start_game, this);
+   main_menu.sound_switch.set_click_handler(switch_mute, nullptr);
    main_menu.exit_button.set_click_handler(exit_game, nullptr);
    display = &main_menu;
 }

@@ -4,7 +4,8 @@
 #include "sound.hpp"
 
 
-enum class SoundName { Gain, Loss, Death, Count };
+enum class SoundName { Gain, Death, Count };
+
 
 class SoundPack {
 

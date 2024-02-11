@@ -2,7 +2,7 @@
 #include <stdexcept>
 
 
-const char * SOUND_NAMES[] = { "sounds/gain.wav", "sounds/loss.wav", "sounds/death.wav" };
+const char * SOUND_NAMES[] = { "sounds/gain.wav", "sounds/death.wav" };
 
 
 void SoundPack::init(SDL_AudioSpec specs)

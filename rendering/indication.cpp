@@ -13,9 +13,6 @@ SDL_Color INDICATION_COLORS[] = {
 };
 
 
-SoundName INDICATION_SOUNDS[] = { SoundName::Gain, SoundName::Loss, SoundName::Gain, SoundName::Loss };
-
-
 Indicator::Indicator(SDL_Rect rect)
 {
    int offs = 8;
@@ -35,9 +32,8 @@ void Indicator::reset()
 
 void Indicator::indicate(Indication ind)
 {
-   int index = (int)ind;
-   globals.audio.play_sound(INDICATION_SOUNDS[index]);
-   mtpoints[index] = high_resolution_clock::now();
+   globals.audio.play_sound(SoundName::Gain);
+   mtpoints[(int)ind] = high_resolution_clock::now();
 }
 
 

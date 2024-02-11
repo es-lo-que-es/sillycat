@@ -4,7 +4,7 @@
 #include <stdexcept>
 
 
-const char * TextureNameStrings[] = { "pics/cat.png" };
+const char * TextureNameStrings[] = { "pics/cat.png", "pics/sound.png", "pics/redx.png" };
 
 
 TexturePack::~TexturePack()

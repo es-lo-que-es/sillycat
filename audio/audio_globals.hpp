@@ -16,6 +16,8 @@ class AudioGlobals {
    void play_sound(SoundName name);
    SDL_AudioSpec specs() const;
 
+   void switch_mute();
+
    ~AudioGlobals();
    AudioGlobals();
 
@@ -25,6 +27,9 @@ class AudioGlobals {
 
    SoundPack msound_pack;
    SDL_AudioSpec mspecs;
+
+   bool mmuted = false;
+
 };
 
 

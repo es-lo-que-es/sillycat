@@ -14,10 +14,17 @@ void AudioGlobals::mix_in_sounds(uint8_t * stream, int len)
 }
 
 
+void AudioGlobals::switch_mute()
+{
+   mmuted = !mmuted;
+   SDL_PauseAudio(mmuted);
+}
+
+
 void fill_callback(void * udata, uint8_t * stream, int len)
 {
    memset(stream, 0, len);
-
+   
    AudioGlobals * self = (AudioGlobals*) udata;
    self->mix_in_sounds(stream, len);
 }
@@ -44,6 +51,7 @@ AudioGlobals::AudioGlobals()
 
 void AudioGlobals::play_sound(SoundName name)
 {
+   if ( mmuted ) return;
    msounds.push_back(msound_pack[name]);
 }
 

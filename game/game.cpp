@@ -62,7 +62,7 @@ void Game::spawn_word()
 void Game::end()
 {
    if ( player.score() > globals.highscore ) globals.highscore = player.score();
-   globals.audio.play_sound(SoundName::Death);
+   if ( player.health() <= 0 ) globals.audio.play_sound(SoundName::Death);
    globals.reset();
    mover = true; 
 }

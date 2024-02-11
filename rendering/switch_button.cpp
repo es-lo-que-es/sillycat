@@ -35,8 +35,11 @@ void SwitchButton::handle_event(SDL_Event * e)
 
 void SwitchButton::render()
 {
-   //if ( !mactive ) render_cross_rect(&mrect, globals.config.font_color);
+   SDL_Renderer * renderer = globals.gui.renderer();
+   SDL_Texture * cross = globals.gui.textures[TextureName::RedX];
+
    if ( mhovered ) render_draw_rect(&mrect, globals.config.font_color);
-   
-   SDL_RenderCopy(globals.gui.renderer(), mtexture, nullptr, &mrect);
+
+   SDL_RenderCopy(renderer, mtexture, nullptr, &mrect);
+   if ( !mactive ) SDL_RenderCopy(renderer, cross, nullptr, &mrect);
 }

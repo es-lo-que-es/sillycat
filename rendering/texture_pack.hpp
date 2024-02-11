@@ -5,7 +5,7 @@
 #include <SDL2/SDL.h>
 
 
-enum class TextureName { Cat, Count };
+enum class TextureName { Cat, Sound, RedX, Count };
 
 
 class TexturePack {

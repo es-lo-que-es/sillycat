@@ -8,6 +8,8 @@ MainMenu::MainMenu(SDL_Rect rect)
    high_score.init("high score:", {rect.x, rect.y, rect.w, 24}, 24);
    high_score.update(globals.highscore);
 
+   sound_switch.init(globals.gui.textures[TextureName::Sound], { 20, rect.h - 60, 40, 40 });
+
    rect.w = rect.w / 2;
    rect.h = rect.h / 4;
 
@@ -18,6 +20,7 @@ MainMenu::MainMenu(SDL_Rect rect)
    rect.y += rect.h;
    exit_button.init("EXIT", rect);
 
+   children.push_back(&sound_switch);
    children.push_back(&play_button);
    children.push_back(&exit_button);
    children.push_back(&high_score);
