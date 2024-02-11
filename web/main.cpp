@@ -29,11 +29,11 @@ EM_BOOL emscripten_loop(double time, void * par)
          if ( !ctx->game_running ) ctx->display = &ctx->main_menu;
       }
 
-      SDL_RenderClear(globals.renderer());
+      SDL_RenderClear(globals.gui.renderer());
       ctx->display->render();
 
    } else {
-      SDL_RenderPresent(globals.renderer());
+      SDL_RenderPresent(globals.gui.renderer());
    }
 
    flag = !flag;
