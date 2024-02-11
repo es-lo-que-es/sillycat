@@ -6,7 +6,7 @@ using namespace std::chrono;
 
 
 SDL_Color INDICATION_COLORS[] = {
-   { 50, 169, 169, 255 },  // blue
+   { 151, 167, 205, 255 }, // blue
    { 134, 147, 147, 255 }, // gray
    { 50, 168, 82, 255 },   // green
    { 169, 50, 50, 255 }    // red

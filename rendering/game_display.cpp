@@ -29,7 +29,7 @@ GameDisplay::GameDisplay(Game * game, SDL_Rect rect)
 {
    mgame = game;
    mscore_label.init("score:", {rect.x, rect.y, rect.w, 20}, 14);
-   mclose_button.init("X", {rect.w - 22, 2, 20, 20});
+   mclose_button.init("X", {rect.w - 48, 8, 40, 40});
    mhealth_bar.init("hp:", {rect.x, rect.y, 100, 20}, 14);
 
    mclose_button.set_click_handler(close_button_handler, game);
