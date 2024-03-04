@@ -83,6 +83,7 @@ if ( ${BUILD_WASM} )
 else()
 
    add_executable(sillycat main.cpp ${GAME_SOURCES} ${RENDERING_SOURCES} ${AUDIO_SOURCES})
-   target_link_libraries(sillycat SDL2 SDL2_image SDL2_ttf)
+   target_link_libraries(sillycat SDL2 SDL2_image SDL2_ttf boost_filesystem)
 
 endif()
+

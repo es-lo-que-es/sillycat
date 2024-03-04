@@ -1,7 +1,7 @@
 #include "gui_globals.hpp"
 
-#include <filesystem>
-using dir_iterator = std::filesystem::directory_iterator;
+#include <boost/filesystem.hpp>
+using dir_iterator = boost::filesystem::directory_iterator;
 
 
 int GuiGlobals::tick() const 
