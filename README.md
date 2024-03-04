@@ -1,9 +1,15 @@
 <h3>SILLI<i>CAT</i></h3>
 <p> simple game about a silly cat dodging flying words </p>
 
+![cat](https://github.com/es-lo-que-es/sillycat/assets/143192493/e5cf8849-247c-465e-8c72-434f62063c5e)
 
 
 <p> u can also <a href="https://es-lo-que-es.github.io/sillycat-web-build/">play it</a> in the browser </p>
+
+
+
+https://github.com/es-lo-que-es/sillycat/assets/143192493/e5dd1701-8f38-4698-8c9b-a2c75704e16f
+
 
 
 
